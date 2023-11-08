@@ -103,7 +103,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'
+                  $ref: '#/components/schemas/Book'
     delete:
       tags:
         - Authors
@@ -121,7 +121,67 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Author'                                    
+                $ref: '#/components/schemas/Author'
+  /Topic:
+    get:
+      tags:
+        - Topic
+      summary: Get all topic
+      parameters:
+        - name: topicName 
+          in: query
+          description: Filter return topic by given name
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: The list of filtered topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topic'  
+    put:
+      tags:
+        - Topic 
+      summary: Create or update a list of Topics 
+      operationId: crupdateTopics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Topic'
+      responses:
+        200:
+          description: The list of created or updated Topics 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topic'
+    delete:
+      tags:
+        - Topic
+      summary: delete one topic by the given id 
+      parameters:
+        - name: topicId 
+          in: query
+          description: id of the topic to delete 
+          required: true 
+          schema:
+            type: string
+      responses:
+        200:
+          description: The topic that have been deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'                                                    
 components:
   schemas:
     Author: 
@@ -138,7 +198,7 @@ components:
             - F  
     Book:
       allOf:
-        - $ref: "#/components/schemas/Book"
+        - $ref: "#/components/schemas/CrupdateBooks"
         - type: object
       properties:
         id:
@@ -166,16 +226,19 @@ components:
             type: string
           bookName:
             type: string
-          author: 
-            $ref: "#/components/schemas/Author" 
           pageNumbers:
             type: integer
-          topic:
-            type: string
-            enum:
-              - ROMANCE
-              - COMEDY
-              - OTHER
           releaseDate:
             type: string
             format: date
+    Topic: 
+        type: object
+        properties:
+          id:
+            type: string
+          topicName:
+            type: string
+            example:
+              - ROMANCE
+              - COMEDY
+              - OTHER
