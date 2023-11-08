@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.0.0
+  version: 1.1.0
   description: STD21010
 servers:
   - url: https://library.com
@@ -32,7 +32,6 @@ paths:
           schema:
             type: string
             format: date              
-        #TODO3: add parameter to filter books by intervals of dates of the releaseDate
       responses:
         200:
           description: The list of filtered books
@@ -62,7 +61,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
   /authors:
-  #TODO2: complete GET (can be filtered by name) - PUT - DELETE
     get:
       tags:
         - Authors
@@ -201,24 +199,10 @@ components:
         - $ref: "#/components/schemas/CrupdateBooks"
         - type: object
       properties:
-        id:
-          type: string
-        bookName:
-          type: string
         author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
           $ref: "#/components/schemas/Author"
-        pageNumbers:
-          type: integer
         topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
+          $ref: "#/components/schemas/Topic"
     CrupdateBooks:
         type: object
         properties:
