@@ -140,7 +140,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Topic'  
+                  $ref: '#/components/schemas/Topic'                  
     put:
       tags:
         - Topic 
@@ -201,7 +201,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/BookTopic'
+                  $ref: '#/components/schemas/BookTopic'                                   
   /books/topics/:
     put:
       tags:
@@ -223,7 +223,22 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'                                                                                      
+                  $ref: '#/components/schemas/Book'
+  /Topic/pagination:                
+    get:
+      tags:
+        - Topic
+      summary: Get page-size
+      parameters:
+        - name: page 
+          in: query
+          description: pageNumbers
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: response page-size                                                                                                       
 components:
   schemas:
     Author: 
