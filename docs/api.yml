@@ -179,7 +179,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Topic'                                                    
+                $ref: '#/components/schemas/Topic'                   
+  /books/{booksId}/topics/{topicId}:
+    put:
+      tags:
+        - Topic 
+      summary: Create or update a list of book and topic by id
+      operationId: crupdateBooksTopics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BookTopic'
+      responses:
+        200:
+          description: The list of created or updated Books and Topics by id  
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookTopic'
+  /books/topics/:
+    put:
+      tags:
+        - Topic
+      summary: Create or update a list of books with topic
+      operationId: crupdateBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Book'
+      responses:
+        200:
+          description: The list of created or updated books with topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'                                                                                      
 components:
   schemas:
     Author: 
@@ -226,3 +270,10 @@ components:
               - ROMANCE
               - COMEDY
               - OTHER
+    BookTopic:
+        type: object
+        properties:
+          booksId:
+            type: string
+          topicsId:
+            type: string
