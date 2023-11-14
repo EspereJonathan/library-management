@@ -185,7 +185,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Topic'                   
+                $ref: '#/components/schemas/Topic'
+  /visitors:
+    get:
+      tags:
+        - Visitor
+      summary: Get all visitors
+      operationId: getVisitors
+      responses:
+        200:
+          description: The list of visitors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visitor'                                   
   /books/{booksId}/topics/{topicId}:
     put:
       tags:
@@ -476,7 +491,6 @@ components:
           enum:
             - M
             - F
-
     ImportBook:
       type: object
       properties:
@@ -496,4 +510,13 @@ components:
           type: string
           format: date
         idAuthor:
-          type: string            
+          type: string
+    Visitor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        reference:
+          type: string                  
